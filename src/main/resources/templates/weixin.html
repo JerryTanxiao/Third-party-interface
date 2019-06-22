@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<p th:text="${info.nickname}"></p>
-<img th:src="${info.headimgurl}"/>
+<p th:text="'昵称是：'+${info.nickname}"></p>
+<img th:text="头像" th:src="${info.headimgurl}"/>
 </body>
 </html>

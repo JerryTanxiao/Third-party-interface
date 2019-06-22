@@ -25,19 +25,19 @@ public class IndexController {
     private String appsecret;
     @RequestMapping("/index")
     public String Index(HttpServletResponse response, Model model) throws UnsupportedEncodingException {
-        String backUrl = "http://2542673ik1.wicp.vip/callback";
-        String url01 = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
+        String backUrl = "http://www.jk520lml.top/callback";
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize?" +
                 "appid=" +appID+
                 "&redirect_uri=" + URLEncoder.encode(backUrl,"UTF-8")+
                 "&response_type=code" +
                 "&scope=snsapi_userinfo" +
                 "&state=STATE#wechat_redirect";
-        model.addAttribute("url",url01);
-//        return  "login";
-        return "redirect:"+url01;
+        model.addAttribute("url",url);
+        return  "login";
+//        return "redirect:"+url;
     }
     @RequestMapping("/callback")
-    public String  callback(String code, HttpServletRequest request) throws IOException {
+    public String  callback(String code,Model model) throws IOException {
         //获取access_token
         System.out.println("code : "+code);
         String url ="https://api.weixin.qq.com/sns/oauth2/access_token?" +
@@ -53,7 +53,7 @@ public class IndexController {
                 + "&openid=" + openid
                 + "&lang=zh_CN";
         JSONObject info = WeiXinUtils.doGetJson(infoUrl);
-        request.setAttribute("info",info);
+        model.addAttribute("info",info);
         System.out.println(info);
         return "weixin";
     }
